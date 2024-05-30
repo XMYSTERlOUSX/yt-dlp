@@ -29,9 +29,9 @@ if curl_cffi is None:
 
 curl_cffi_version = tuple(int_or_none(x, default=0) for x in curl_cffi.__version__.split('.'))
 
-if curl_cffi_version != (0, 5, 10):
-    curl_cffi._yt_dlp__version = f'{curl_cffi.__version__} (unsupported)'
-    raise ImportError('Only curl_cffi 0.5.10 is supported')
+#if curl_cffi_version != (0, 5, 10):
+    #curl_cffi._yt_dlp__version = f'{curl_cffi.__version__} (unsupported)'
+    #raise ImportError('Only curl_cffi 0.5.10 is supported')
 
 import curl_cffi.requests
 from curl_cffi.const import CurlECode, CurlOpt
@@ -110,17 +110,26 @@ class CurlCFFIRH(ImpersonateRequestHandler, InstanceStoreMixin):
     _SUPPORTED_FEATURES = (Features.NO_PROXY, Features.ALL_PROXY)
     _SUPPORTED_PROXY_SCHEMES = ('http', 'https', 'socks4', 'socks4a', 'socks5', 'socks5h')
     _SUPPORTED_IMPERSONATE_TARGET_MAP = {
-        ImpersonateTarget('chrome', '110', 'windows', '10'): curl_cffi.requests.BrowserType.chrome110,
-        ImpersonateTarget('chrome', '107', 'windows', '10'): curl_cffi.requests.BrowserType.chrome107,
-        ImpersonateTarget('chrome', '104', 'windows', '10'): curl_cffi.requests.BrowserType.chrome104,
-        ImpersonateTarget('chrome', '101', 'windows', '10'): curl_cffi.requests.BrowserType.chrome101,
-        ImpersonateTarget('chrome', '100', 'windows', '10'): curl_cffi.requests.BrowserType.chrome100,
-        ImpersonateTarget('chrome', '99', 'windows', '10'): curl_cffi.requests.BrowserType.chrome99,
-        ImpersonateTarget('edge', '101', 'windows', '10'): curl_cffi.requests.BrowserType.edge101,
-        ImpersonateTarget('edge', '99', 'windows', '10'): curl_cffi.requests.BrowserType.edge99,
-        ImpersonateTarget('safari', '15.5', 'macos', '12'): curl_cffi.requests.BrowserType.safari15_5,
-        ImpersonateTarget('safari', '15.3', 'macos', '11'): curl_cffi.requests.BrowserType.safari15_3,
-        ImpersonateTarget('chrome', '99', 'android', '12'): curl_cffi.requests.BrowserType.chrome99_android,
+        ImpersonateTarget('noimpersonate', '', '', ''): None,
+        ImpersonateTarget('chrome', 'latest', 'windows', '10'): curl_cffi.requests.BrowserType.chrome110,
+        ImpersonateTarget('edge99', '', 'windows', '10'): curl_cffi.requests.BrowserType.edge99,
+        #ImpersonateTarget('edge101', '', 'windows', '10'): curl_cffi.requests.BrowserType.edge101,
+        ImpersonateTarget('chrome99', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome99,
+        ImpersonateTarget('chrome100', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome100,
+        ImpersonateTarget('chrome101', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome101,
+        ImpersonateTarget('chrome104', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome104,
+        ImpersonateTarget('chrome107', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome107,
+        ImpersonateTarget('chrome110', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome110,
+        #ImpersonateTarget('chrome116', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome116,
+        #ImpersonateTarget('chrome119', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome119,
+        #ImpersonateTarget('chrome120', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome120,
+        #ImpersonateTarget('chrome123', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome123,
+        #ImpersonateTarget('chrome124', '', 'windows', '10'): curl_cffi.requests.BrowserType.chrome124,
+        ImpersonateTarget('chrome99_android', '', 'android', '12'): curl_cffi.requests.BrowserType.chrome99_android,
+        #ImpersonateTarget('safari15_3', '', 'macos', '11'): curl_cffi.requests.BrowserType.safari15_3,
+        #ImpersonateTarget('safari15_5', '', 'macos', '12'): curl_cffi.requests.BrowserType.safari15_5,
+        #ImpersonateTarget('safari17_0', '', 'macos', '12'): curl_cffi.requests.BrowserType.safari17_0,
+        #ImpersonateTarget('safari17_2_ios', '', 'ios', '17'): curl_cffi.requests.BrowserType.safari17_2_ios,
     }
 
     def _create_instance(self, cookiejar=None):
